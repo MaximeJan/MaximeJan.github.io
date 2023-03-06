@@ -69,7 +69,7 @@
     <script>
         function generateSHA256() {
             const dataEntry = document.getElementById("dataEntry");
-            const data = dataEntry.value;
+            const data = dataEntry.value.replace(/\s+/g, "");
             const hash = sha256(data);
             const sha256Paragraph = document.getElementById("sha256");
             sha256Paragraph.innerText = hash
