@@ -19,6 +19,12 @@
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">
                 <p>Ecrivez ci-dessous vos images en format PBM (P1), PGM (P2) et PPM (P3)</p>
+
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-8 text-center">
+                        <p id="sha256"></p>
+                    </div>
+                </div>
                 <textarea id="dataEntry" class="form-control" rows="14" cols="80">P1
 36 11
 1 0 0 0 1 0 0 1 1 1 1 1 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 1 1 1 1 0 0 1
@@ -34,9 +40,11 @@
 1 0 0 0 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 0 0 1</textarea>
             </div>
         </div>
+
         <div class="row justify-content-center mb-4 mt-4">
             <div class="col-md-8 text-center">
-                <button id="dataEntryBtn" class="btn btn-primary">Générer l'image</button>
+                <button id="dataEntryBtn" class="btn btn-primary" onclick="generateSHA256()">Générer l'image et
+                    SHA256</button>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -44,9 +52,28 @@
                 <canvas id="canvas2" style="image-rendering:pixelated;"></canvas>
             </div>
         </div>
+
+
+
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                Source : <a href="https://kylepaulsen.com/stuff/NetpbmViewer/">Kyle Paulsen</a>
+            </div>
+        </div>
     </div>
 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
     <script>
+        function generateSHA256() {
+            const dataEntry = document.getElementById("dataEntry");
+            const data = dataEntry.value;
+            const hash = sha256(data);
+            const sha256Paragraph = document.getElementById("sha256");
+            sha256Paragraph.innerText = hash
+        }
         function NetPBM() {
             function toBin(x) {
                 var bin = x.toString(2);
@@ -257,15 +284,5 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 </body>
-
-<footer class="bg-dark text-white py-3 mt-auto" style="  position: fixed; left: 0; bottom: 0; width: 100%;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                Source : <a href="https://kylepaulsen.com/stuff/NetpbmViewer/" class="text-white">Kyle Paulsen</a>
-            </div>
-        </div>
-    </div>
-</footer>
 
 </html>
