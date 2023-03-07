@@ -43,8 +43,7 @@
 
         <div class="row justify-content-center mb-4 mt-4">
             <div class="col-md-8 text-center">
-                <button id="dataEntryBtn" class="btn btn-primary" onclick="generateSHA256()">Générer l'image et
-                    SHA256</button>
+                <button id="dataEntryBtn" class="btn btn-primary" onclick="generateSHA256()">Générer l'image</button>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -72,7 +71,7 @@
             const data = dataEntry.value.replace(/\s+/g, "");
             const hash = sha256(data);
             const sha256Paragraph = document.getElementById("sha256");
-            sha256Paragraph.innerText = hash
+            sha256Paragraph.innerHTML= "<b>Code Moodle :</b> " + hash
         }
         function NetPBM() {
             function toBin(x) {
