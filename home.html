@@ -43,7 +43,7 @@
 
         <div class="row justify-content-center mb-4 mt-4">
             <div class="col-md-8 text-center">
-                <button id="dataEntryBtn" class="btn btn-primary" onclick="generateSHA256()">Générer l'image</button>
+                <button id="dataEntryBtn" class="btn btn-primary">Générer l'image</button>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -66,13 +66,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
     <script>
-        function generateSHA256() {
-            const dataEntry = document.getElementById("dataEntry");
-            const data = dataEntry.value.replace(/\s+/g, "");
-            const hash = sha256(data);
-            const sha256Paragraph = document.getElementById("sha256");
-            sha256Paragraph.innerHTML= "<b>Code Moodle :</b> " + hash
-        }
+
         function NetPBM() {
             function toBin(x) {
                 var bin = x.toString(2);
@@ -265,6 +259,11 @@
             netPBM.render(str2ab(get("dataEntry").value), get("canvas2"));
             var canvas = get("canvas2");
             canvas.style.width = canvas.width * 8
+            const dataEntry = document.getElementById("dataEntry");
+            const data = dataEntry.value.replace(/\s+/g, "");
+            const hash = sha256(canvas.toDataURL("image/jpeg", 1.0));
+            const sha256Paragraph = document.getElementById("sha256");
+            sha256Paragraph.innerHTML= "<b>Code Moodle :</b> " + hash.substring(0,8)
         });
     </script>
 
