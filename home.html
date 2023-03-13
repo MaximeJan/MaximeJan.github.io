@@ -259,9 +259,9 @@
             netPBM.render(str2ab(get("dataEntry").value), get("canvas2"));
             var canvas = get("canvas2");
             canvas.style.width = canvas.width * 8
-            const dataEntry = document.getElementById("dataEntry");
-            const data = dataEntry.value.replace(/\s+/g, "");
-            const hash = sha256(canvas.toDataURL("image/jpeg", 1.0));
+
+            
+            const hash = sha256(canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data.join());
             const sha256Paragraph = document.getElementById("sha256");
             sha256Paragraph.innerHTML= "<b>Code Moodle :</b> " + hash.substring(0,8)
         });
